@@ -18,24 +18,12 @@ hist(Steps,breaks=12,main="Histogram of the total number of steps taken each day
 
 ![plot of chunk Q2.1](figure/Q2.1.png) 
 
-The mean and median total number of steps taken per day is:
-
-
 ```r
-mean(Steps)
+mean <- mean(Steps)
+median <- median(Steps)
 ```
 
-```
-## [1] 9354
-```
-
-```r
-median(Steps)
-```
-
-```
-## [1] 10395
-```
+The mean and median total number of steps taken per day is 9354.2295 and 10395, respectively.
 
 ## 3. What is the average daily activity pattern?
 
@@ -49,30 +37,21 @@ title("Average daily activity pattern")
 
 ![plot of chunk Q3.1](figure/Q3.1.png) 
 
-The 5-minute interval containing the maximum number of steps is:
-
-
 ```r
-Minutes[which.max(Average5M)]
+Max <- Minutes[which.max(Average5M)]
 ```
 
-```
-## [1] "835"
-```
+The 5-minute interval containing the maximum number of steps is 835. 
 
 
 ## 4. Imputing missing values
 
-The total number of missing values in the dataset:
-
 
 ```r
-sum(is.na(data[,1]))
+missings <- sum(is.na(data[,1]))
 ```
 
-```
-## [1] 2304
-```
+The total number of missing values in the dataset is 2304.
 
 Create a new dataset that is equal to the original dataset but with the missing data filled with the mean for that 5-minute interval:
 
@@ -84,17 +63,6 @@ for (x in 1:nrow(data2)){
         data2[x,1] <- Average5M[ as.character(data2[x,3]) ] 
     }
 }
-head(data2)
-```
-
-```
-##     steps       date interval
-## 1 1.71698 2012-10-01        0
-## 2 0.33962 2012-10-01        5
-## 3 0.13208 2012-10-01       10
-## 4 0.15094 2012-10-01       15
-## 5 0.07547 2012-10-01       20
-## 6 2.09434 2012-10-01       25
 ```
 
 The histogram of the total number of steps taken each day:
@@ -107,28 +75,17 @@ hist(StepsIM,breaks=12,xlab="Steps",main=NULL)
 
 ![plot of chunk Q4.3](figure/Q4.3.png) 
 
-The mean and median total number of steps taken per day is:
-
-
 ```r
-mean(StepsIM)
+mean <- mean(StepsIM)
+median <- median(StepsIM)
 ```
 
-```
-## [1] 10766
-```
-
-```r
-median(StepsIM)
-```
-
-```
-## [1] 10766
-```
+The mean and median total number of steps taken per day is 1.0766 &times; 10<sup>4</sup> and 1.0766 &times; 10<sup>4</sup>, respectively.
 
 From these results, the mean total number of steps taken per day is significantly 
 improved, and the median value is comparable to the estimate from the first part 
-of the assignment. It also seems that imputing missing data does have significantly influence on the distribution of the total daily number of steps.
+of the assignment. It also seems that imputing missing data does have significantly 
+influence on the distribution of the total daily number of steps.
 
 ## 5. Are there differences in activity patterns between weekdays and weekends?
 
@@ -151,7 +108,7 @@ Plotting:
 
 ```r
 plot(Minutes,Average5Mweekday,type="l",col="red",ylab="Average number of steps taken")
-lines(Average5Mweekend,type="l",col="blue")
+lines(Minutes,Average5Mweekend,type="l",col="blue")
 legend("topright",legend=c("weekday","weekend"),col=c("red","blue"),lty=1)
 title("Average daily activity pattern")
 ```
